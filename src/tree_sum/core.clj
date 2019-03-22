@@ -23,23 +23,29 @@
   (list x (list y z)))
 
 (defn add-nodes [x y]
-  (+ (first (flatten x)) (first (flatten y))))
+  (+ (first x) (first y)))
+
+(defn gen-tree [tree]
+  (cond
+    (not (tree? tree))
+    (list tree)
+    :else
+    (let [a (gen-tree (first tree))
+          b (gen-tree (first (rest tree)))]
+      (make-node (add-nodes a b)
+                 a
+                 b))))
+
+(defn tree-calc [tree fn]
+  (apply fn (flatten (gen-tree tree))))
+
+
+
+
+
 
 (defn biggest-value [tree]
   (apply max (flatten tree)))
-
-(defn gen-tree [tree]
-  ;(println tree)
-  (cond
-    (not (tree? tree))
-      (list tree)
-    :else
-    (let [x (first tree) y (first (rest tree)) a (gen-tree x) b (gen-tree y)]
-      ;(println a "---" b)
-        (make-node (add-nodes a b)
-                   a
-                   b)))
-  )
 
 (defn sum-tree [tree]
   (if (coll? tree)
