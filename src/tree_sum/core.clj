@@ -12,28 +12,32 @@
 
 (def left '((((1 2) 2) 2) 2))
 
-(def problem-tree '(((-5 (3 -1)) ((-2 4))) ((-6 (7 (-2 5))))))
+(def problem-tree '(((-5 (3 -1)) (-2 4)) ((-6 (7 (-2 5))))))
 
-(def full-tree '(5 (1 (-1 (-5) (4 (3 1))) (2 (-2 4))) (4 (-6) (10 (7 (3 (-2 5)))))))
+(def full-tree '(3 (-1 (-3 (-5) (2 (3 -1))) (2 (-2 4))) (4 (-6) (10 (7 (3 (-2 5)))))))
 
 (defn tree? [seq]
   (and (seq? seq) (not (empty? seq))))
 
 (defn make-node [x y z]
+  (println "making node ((" x  "(" y z "))" )
 (list x (list y z)))
 
+(defn add-nodes [x y]
+  (+ (first x) (first y)))
+
 (defn gen-tree [tree]
-  (println tree)
+  ;(println tree)
   (cond
     (not (tree? tree))
-      tree
+      (list tree)
     :else
-    (let [x (first tree) y (first (rest tree))]
-        (make-node (+ (gen-tree x) (gen-tree y))
-                   (gen-tree x)
-                   (gen-tree y))))
+    (let [x (first tree) y (first (rest tree)) a (gen-tree x) b (gen-tree y)]
+      ;(println a "---" b)
+        (make-node (add-nodes a b)
+                   a
+                   b)))
   )
-
 
 
 
