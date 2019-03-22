@@ -12,7 +12,7 @@
 
 (def left '((((1 2) 2) 2) 2))
 
-(def problem-tree '(((-5 (3 -1)) (-2 4)) ((-6 (7 (-2 5))))))
+(def problem-tree '(((-5 (3 -1)) (-2 4)) (-6 (7 (-2 5)))))
 
 (def full-tree '(3 (-1 (-3 (-5) (2 (3 -1))) (2 (-2 4))) (4 (-6) (10 (7 (3 (-2 5)))))))
 
@@ -20,11 +20,13 @@
   (and (seq? seq) (not (empty? seq))))
 
 (defn make-node [x y z]
-  (println "making node ((" x  "(" y z "))" )
-(list x (list y z)))
+  (list x (list y z)))
 
 (defn add-nodes [x y]
-  (+ (first x) (first y)))
+  (+ (first (flatten x)) (first (flatten y))))
+
+(defn biggest-value [tree]
+  (apply max (flatten tree)))
 
 (defn gen-tree [tree]
   ;(println tree)
@@ -39,8 +41,6 @@
                    b)))
   )
 
-
-
 (defn sum-tree [tree]
   (if (coll? tree)
     (apply + (map sum-tree tree))
@@ -48,7 +48,6 @@
 
 (defn biggest-branch [tree]
   (apply max-key sum-tree tree))
-
 
 (defn branch? [x]
   (coll? x))
@@ -73,6 +72,5 @@
 (defn test-map [tree]
   (map inc tree))
 
-(defn biggest-value [tree]
-  (apply max (flatten tree)))
+
 

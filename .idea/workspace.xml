@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7dac766b-f305-4512-b6d3-aacea1632a1e" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/tree_sum/core.clj" beforeDir="false" afterPath="$PROJECT_DIR$/src/tree_sum/core.clj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tree-sum.iml" beforeDir="false" afterPath="$PROJECT_DIR$/tree-sum.iml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -20,8 +16,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/tree_sum/core.clj">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="40">
-              <caret line="16" column="21" selection-start-line="16" selection-start-column="21" selection-end-line="16" selection-end-column="21" />
+            <state relative-caret-position="640">
+              <caret line="32" column="7" lean-forward="true" selection-start-line="32" selection-start-column="7" selection-end-line="32" selection-end-column="7" />
             </state>
           </provider>
         </entry>
@@ -105,7 +101,7 @@
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
-  <component name="ReplState" timestamp="1553273045113">{:repl-history {:ide [], :local [{:command &quot;(gen-tree simple)&quot;, :offset 16, :ns &quot;tree-sum.core&quot;} {:command &quot;(gen-tree tree)&quot;, :offset 14, :ns &quot;tree-sum.core&quot;} {:command &quot;(gen-tree problem-tree)&quot;, :offset 22, :ns &quot;tree-sum.core&quot;} {:command &quot;(first 1)&quot;, :offset 8, :ns &quot;tree-sum.core&quot;}], :remote []}}</component>
+  <component name="ReplState" timestamp="1553273564001">{:repl-history {:ide [], :local [{:command &quot;(gen-tree simple)&quot;, :offset 16, :ns &quot;tree-sum.core&quot;} {:command &quot;(gen-tree tree)&quot;, :offset 14, :ns &quot;tree-sum.core&quot;} {:command &quot;(gen-tree problem-tree)&quot;, :offset 22, :ns &quot;tree-sum.core&quot;} {:command &quot;(first 1)&quot;, :offset 8, :ns &quot;tree-sum.core&quot;}], :remote []}}</component>
   <component name="RunDashboard">
     <option name="ruleStates">
       <list>
@@ -229,8 +225,8 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/tree_sum/core.clj">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="40">
-          <caret line="16" column="21" selection-start-line="16" selection-start-column="21" selection-end-line="16" selection-end-column="21" />
+        <state relative-caret-position="640">
+          <caret line="32" column="7" lean-forward="true" selection-start-line="32" selection-start-column="7" selection-end-line="32" selection-end-column="7" />
         </state>
       </provider>
     </entry>
