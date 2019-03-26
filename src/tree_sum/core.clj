@@ -35,8 +35,31 @@
   ;Helper function to add node into existing tree
   (+ (first x) (first y)))
 
+(defn append
+    ([tree left right]
+    (if(not(nil? left)) (conj tree left))
+    (if(not(nil? right)) (conj tree right)))
+  ([left right]
+    (cond
+      (nil? left) right
+      (nil? right) left
+    :else
+      (conj left right))))
+
+(defn append-2
+  ([tree left right]
+   (if(not(nil? left)) (conj tree left))
+   (if(not(nil? right)) (conj tree right)))
+  ([left right]
+     (conj left right)))
+
+;(cond
+;  (and (nil? right)) (nil? left))
+;nil
+;:else
+
 (defn gen-tree [tree]
-  ;From a partially completed tree, gnerates the full tree
+  ;From a partially completed tree, generates the full tree
   (cond
     (not (tree? tree))
     (list tree)
@@ -46,7 +69,6 @@
       (make-node (add-nodes a b)
                  a
                  b))))
-
 
 (defn zero-sum [tree]
   (let [ left (left-child tree)
@@ -61,17 +83,39 @@
       :else
       (list (zero-sum left) (zero-sum right)))))
 
-
 (defn zero-sum2 [tree]
   (let [ left (left-child tree)
         right (right-child tree)]
     (cond
-      (and (not (tree? tree)) (= 0 tree))
+      (and (not (tree? tree)) (= tree 0))
         tree
       (and (tree? tree) (= (first tree) 0))
-        (list tree (zero-sum left) (zero-sum right))
+        (list tree (zero-sum2 left) (zero-sum2 right))
       (tree? tree)
-        (list (zero-sum left) (zero-sum right)))))
+        (list (zero-sum2 left) (zero-sum2 right)))))
+
+;if coll? recur
+;(defn zero-sum3 [tree]
+;  (let [left (left-child tree)
+;        right (right-child tree)]
+;    (cond
+;      (and (not (tree? tree)) (zero? tree))
+;        tree
+;      (tree? tree)
+;      (or (filter #(zero?((first %) %)) left) (filter #(zero?(first %)) right)))
+;    :else
+;      ((zero-sum3 (rest left)) (zero-sum3 (rest right)))))
+
+(defn zero-sum4 [tree]
+  (let [ left (left-child tree)
+        right (right-child tree)]
+    (cond
+      (and (not (tree? tree)) (= tree 0))
+      tree
+      (and (tree? tree) (= (first tree) 0))
+      (append-2 tree (zero-sum4 left) (zero-sum4 right))
+      (tree? tree)
+      (append-2 (zero-sum4 left) (zero-sum4 right)))))
 
 (defn tree-calc [tree fn]
   ;Caller to use to apply max/min function
@@ -82,10 +126,12 @@
   {:max
    (apply max (flatten (gen-tree tree)))
    :min
-   (apply min (flatten (gen-tree tree)))})
+   (apply min (flatten (gen-tree tree)))}
+   :zero-sum
+   (zero-sum4 (gen-tree tree)))
 
 
-
+;(filter #(zero?(first %)) '((0 (1 2)1 2) (1 2 6 (0 3 )7 8) (7 8 1)))
 
 
 
