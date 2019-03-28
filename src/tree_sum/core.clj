@@ -17,6 +17,48 @@
 
 (def full-tree '(3 ((-1 ((-3 ((-5) (2 ((3) (-1))))) (2 ((-2) (4))))) (4 ((-6) (10 ((7) (3 ((-2) (5))))))))))
 
+
+;testing
+(defn tester [tests]
+  (doseq [test tests]
+    (mif ['(?id -- ?pre => ?post) test]
+         (if-not (= (eval (? pre)) (? post))
+           (mout '(?id -- ?pre => ?post)))
+         `(error ill formed test: ~test)
+         )))
+
+(def tree-tests-maximum
+  '( (1 -- (maximum-tree? '(((1 2)3) (4 ((5 6)7))) ) => 28)
+     (2 -- (maximum-tree? '(((3 9)-3) (-1 ((12 -3)2))) ) => 19)
+     (3 -- (maximum-tree? '(((1 2)9) (3 ((-2 -3)-6))) ) => 12)
+     (4 -- (maximum-tree? '(((6 3)1) (5 ((9 2)4))) ) => 30)
+     (5 -- (maximum-tree? '(((-4 -6)2) (1 ((-3 3)3))) ) => 4)
+     (6 -- (maximum-tree? '(((-8 -3)15) (1 ((-2 -1)2))) ) => 15)
+     (7 -- (maximum-tree? '(((0 -4)0) (-3 ((1 0)2))) ) => 3)
+     (8 -- (maximum-tree? '(((6 4)-3) (-8 ((16 -3)2))) ) => 16)
+     ))
+
+(def tree-tests-minimum
+  '( (1 -- (minimum-tree? '(((1 2)3) (4 ((5 6)7))) ) => 1)
+     (2 -- (minimum-tree? '(((3 9)-3) (-1 ((12 -3)2))) ) => -3)
+     (3 -- (minimum-tree? '(((1 2)9) (3 ((-2 -3)-6))) ) => -11)
+     (4 -- (minimum-tree? '(((6 3)1) (5 ((9 2)4))) ) => 1)
+     (5 -- (minimum-tree? '(((-4 -6)2) (1 ((-3 3)3))) ) => -10)
+     (6 -- (minimum-tree? '(((-8 -3)15) (1 ((-2 -1)2))) ) => -11)
+     (7 -- (minimum-tree? '(((0 -4)0) (-3 ((1 0)2))) ) => -4)
+     (8 -- (minimum-tree? '(((6 4)-3) (-8 ((16 -3)2)))) => -8)
+     ))
+
+(def tree-tests-zero-sum
+  '( (1 -- (zero-sum?  ) =>  )
+     (2 -- (zero-sum?  ) =>  )
+     (3 -- (zero-sum?  ) =>  )
+     (4 -- (zero-sum?  ) =>  )
+     (5 -- (zero-sum?  ) =>  )
+     (6 -- (zero-sum?  ) =>  )
+     (7 -- (zero-sum?  ) =>  )
+     ))
+
 (defn tree? [seq]
   ;Helper function to check if tree or not
   (and (seq? seq) (not (empty? seq))))
