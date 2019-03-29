@@ -3,6 +3,23 @@
             [org.clojars.cognesence.matcher.core :refer :all]
             [org.clojars.cognesence.ops-search.core :refer :all]))
 
+(def node '(1 ((4) (-3))))
+
+(def zero-node '(0 ((4) (-4))))
+
+(def tree '((1 1) (2 2)))
+
+(def simple '(4 5))
+
+(def left '((((1 2) 2) 2) 2))
+
+(def problem-tree '(((-5 (3 -1)) (-2 4)) (-6 (7 (-2 5)))))
+
+(def zero-tree '(((4 0) (-1 -3)) ((1 -2) (3 -3))))
+
+(def full-tree '(3 ((-1 ((-3 ((-5) (2 ((3) (-1))))) (2 ((-2) (4))))) (4 ((-6) (10 ((7) (3 ((-2) (5))))))))))
+
+
 (defn tester [tests]
   (mfor ['(?id ?test => ?res) tests]
         (if-not (= (eval (? test)) (eval (? res)))
