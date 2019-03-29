@@ -100,7 +100,7 @@
       (and (not (tree? tree)) (= 0 tree))
       tree
       (not (tree? tree))
-      nil
+      false
       (= (first tree) 0)
       (list tree (zero-sum left) (zero-sum right))
       :else
@@ -151,14 +151,18 @@
 (defn minimum-tree-sum [tree]
   (tree-calc tree min))
 
-(defn tree-cal-key [tree]
+(defn wipe-nil [tree]
+  (if (every? nil? (flatten tree))
+    nil tree))
+
+(defn tree-calc-key [tree]
   ;Caller to use to apply max/min selectively or all functions
   {:max
    (maximum-tree-sum tree)
    :min
    (minimum-tree-sum tree)
    :zero-sum
-   (zero-sum (gen-tree tree))})
+   (wipe-nil(zero-sum4 (gen-tree tree)))})
 
 
 (def tests ;some simple tests
@@ -190,14 +194,15 @@
      ))
 
 (def tree-tests-zero-sum
-  '( (1 (zero-sum?  ) =>  )
-     (2 (zero-sum?  ) =>  )
-     (3 (zero-sum?  ) =>  )
-     (4 (zero-sum?  ) =>  )
-     (5 (zero-sum?  ) =>  )
-     (6 (zero-sum?  ) =>  )
-     (7 (zero-sum?  ) =>  )
-     ))
+  '( (1 ((tree-calc-key '(((1 2)3) (4 ((5 6)7)))) :zero-sum) =>  nil)
+     (2 ((tree-calc-key '(((3 9)-3) (-1 ((12 -3)2)))):zero-sum) => nil)
+     (3 ((tree-calc-key '(((1 2)9) (3 ((-2 -3)-6)))) :zero-sum) =>  nil)
+     (4 ((tree-calc-key '(((6 3)1) (5 ((9 2)4)))):zero-sum) =>  nil)
+     (5 ((tree-calc-key '(((-4 -6)2) (1 ((-3 3)3)))) :zero-sum) =>  '((((nil) (nil) 0 ((-3) (3))) nil) (nil) (nil) nil))
+     (6 ((tree-calc-key '(((-8 -3)15) (1 ((-2 -1)2)))) :zero-sum) =>  '((((nil) (nil) nil) 0 ((1) (-1 ((-3 ((-2) (-1))) (2))))) (nil) (nil) nil))
+     (7 ((tree-calc-key '(((6 4)-3) (-8 ((16 -3)2))) :zero-sum)=> nil)
+     (8 ((tree-calc-key zero-tree) :zero-sum) => nil)
+     )))
 
 
 
